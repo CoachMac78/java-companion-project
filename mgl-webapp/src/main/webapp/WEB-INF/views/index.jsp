@@ -1,4 +1,3 @@
-<%@ taglib tagdir="/WEB-INF/tags" prefix="mgl" %>
 <html>
 
 <head>
@@ -21,7 +20,13 @@
 </head>
 
 <body>
-   <mgl:myNav/>
+    <nav id="MistLibrary-navbar" class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}">
+			<img src="resources/static/images/MGLlogo.png" width="90" height="60" alt="">
+		</a>
+        <a class="nav-item nav-link" href="games">Games</a>
+        <a class="nav-item nav-link" href="review">Review</a>
+    </nav>
     <br>
     <div class="container">
         <div class="row">

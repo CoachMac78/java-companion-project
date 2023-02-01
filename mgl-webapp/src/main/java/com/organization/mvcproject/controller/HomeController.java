@@ -3,10 +3,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.organization.mvcproject.model.Game;
+import com.organization.mvcproject.model.Review;
+import org.springframework.ui.ModelMap;
 
 @Controller
 public class HomeController {
-   
+	
+	@GetMapping(value = "/")
+	public String home() {
+		return "index";
+	}
+
+	@PostMapping(value = "/addReview")
+	public ModelAndView addReview(Review review, ModelMap model) {
+		if(review.getAuthor().equals("")) {
+			review.setAuthor("anonymous");
+		}
+
+		return new ModelAndView("reviewDetailPage", "submittedReview", review);
+	}
+	
+	@GetMapping(value = "/review")
+	public ModelAndView review() {
+		
+		return new ModelAndView("reviewCreatePage", "command", new Review());
+	}
+	
+	@GetMapping(value = "/games")
+	public ModelAndView game() {
+		return new ModelAndView("games", "command", new Game());
+	}
+	
 	@RequestMapping(value="/hello")
     public ModelAndView hello(@RequestParam(required=false, defaultValue="World") String name) {
         ModelAndView ret = new ModelAndView("home");

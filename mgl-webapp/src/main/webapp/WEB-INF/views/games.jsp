@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="mgl" %>
     <!DOCTYPE html>
     <html>
 
     <head>
+        <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-        <script src="resources/static/js/app.js" /></script>
-        <script src="resources/static/js/MGL_Task1.service.js"></script>
-        <script src="resources/static/js/MGL_Task1.controller.js"></script>
+        <script src="resources/static/js/game.module.js" /></script>
+        <script src="resources/static/js/service/game.service.js"></script>
+        <script src="resources/static/js/controller/game.controller.js"></script>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,24 +26,30 @@
     	<link rel="icon" type="image/png" sizes="16x16" href="resources/static/images/favicon-16x16.png">
     </head>
 
-    <body ng-app="MGL_Task1_app" class="ng-cloak">
-        <mgl:myNav/>
+    <body ng-app="GameApp" class="ng-cloak">
+        <nav id="MistLibrary-navbar" class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">
+			<img src="resources/static/images/MGLlogo.png" width="90" height="60" alt="">
+		</a>
+            <a class="nav-item nav-link" href="games">Games</a>
+            <a class="nav-item nav-link" href="review">Review</a>
+        </nav>
         <br>
-        <div class="container" ng-controller="MGL_Task1_Controller as MGL_T1_ctrl">
+        <div class="container" ng-controller="GameController as ctrl">
             <div class="panel panel-default">
                 <div class="panel-heading text-light"><span class="lead">Game Registration Form </span></div>
                 <div class="formcontainer">
-                    <form ng-submit="MGL_T1_ctrl.addGame()" name="gameForm" class="form-horizontal">
-                        <input type="hidden" ng-model="MGL_T1_ctrl.game.game_id" />
+                    <form ng-submit="ctrl.addGame()" name="gameForm" class="form-horizontal">
+                        <input type="hidden" ng-model="ctrl.game.id" />
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label class="col-md-2 control-lable text-light" for="game_name">Name*</label>
+                                <label class="col-md-2 control-lable text-light" for="name">Name*</label>
                                 <div class="col-md-7">
-                                    <input type="text" ng-model="MGL_T1_ctrl.game.game_name" id="game_name" class="game_name form-control input-sm" placeholder="Enter the name of the new game [required]" required ng-minlength="3" />
+                                    <input type="text" ng-model="ctrl.game.name" id="name" class="name form-control input-sm" placeholder="Enter the name of the new game [required]" required ng-minlength="3" />
                                     <div class="has-error" ng-show="gameForm.$dirty">
-                                        <span ng-show="gameForm.game_name.$error.required">This is a required field</span>
-                                        <span ng-show="gameForm.game_name.$error.minlength">Minimum length required is 3</span>
-                                        <span ng-show="gameForm.game_name.$invalid">This field is invalid </span>
+                                        <span ng-show="gameForm.name.$error.required">This is a required field</span>
+                                        <span ng-show="gameForm.name.$error.minlength">Minimum length required is 3</span>
+                                        <span ng-show="gameForm.name.$invalid">This field is invalid </span>
                                     </div>
                                 </div>
                             </div>
@@ -52,9 +58,9 @@
 
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label class="col-md-2 control-lable text-light" for="game_genre">Game Genre</label>
+                                <label class="col-md-2 control-lable text-light" for="genre">Game Genre</label>
                                 <div class="col-md-7">
-                                    <input type="text" ng-model="MGL_T1_ctrl.game.game_genre" id="game_genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
+                                    <input type="text" ng-model="ctrl.game.genre" id="genre" class="form-control input-sm" placeholder="Enter the genre of the new game" />
                                 </div>
                             </div>
                         </div>
@@ -80,9 +86,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="currentGame in MGL_T1_ctrl.games">
-                                <td><span ng-bind="currentGame.game_name"></span></td>
-                                <td><span ng-bind="currentGame.game_genre"></span></td>
+                            <tr ng-repeat="currentGame in ctrl.games">
+                                <td><span ng-bind="currentGame.name"></span></td>
+                                <td><span ng-bind="currentGame.genre"></span></td>
                                 <td>
                                 </td>
                             </tr>
