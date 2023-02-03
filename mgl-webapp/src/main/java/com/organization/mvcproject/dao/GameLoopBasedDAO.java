@@ -10,7 +10,7 @@ import com.organization.mvcproject.model.Game;
 public class GameLoopBasedDAO {
 
 	private static Long gameId = new Long(0);
-	private static List<Game> games = new ArrayList<Game>();
+	private static List<Game> games = new ArrayList<>();
 
 	static {
 		games = populateGames();
@@ -43,10 +43,6 @@ public class GameLoopBasedDAO {
 	/*
 	 *  end static declarations
 	 */
-	
-	public List<Game> retreiveAllGames() {
-		return games;
-	}
 
 	public Game saveGame(Game game) {
 		if(game.getId() != null) {
@@ -83,7 +79,7 @@ public class GameLoopBasedDAO {
 	
 	public boolean deleteGame(Long id) {
 		for(int i = 0; i < games.size(); i++) {
-			if( id == games.get(i).getId()) {
+			if( id.equals(games.get(i).getId())) {
 				games.remove(games.get(i));
 				return true;
 			}

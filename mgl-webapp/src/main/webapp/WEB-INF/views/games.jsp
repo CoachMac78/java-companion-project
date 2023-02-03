@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-        <script src="resources/static/js/game.module.js" /></script>
+        <script src="resources/static/js/game.module.js"></script>
         <script src="resources/static/js/service/game.service.js"></script>
         <script src="resources/static/js/controller/game.controller.js"></script>
 
@@ -26,7 +26,7 @@
     	<link rel="icon" type="image/png" sizes="16x16" href="resources/static/images/favicon-16x16.png">
     </head>
 
-    <body ng-app="GameApp" class="ng-cloak">
+    <body data-ng-app="GameApp" class="ng-cloak">
         <nav id="MistLibrary-navbar" class="navbar navbar-expand-md navbar-dark bg-dark">
             <a class="navbar-brand" href="${pageContext.request.contextPath}">
 			<img src="resources/static/images/MGLlogo.png" width="90" height="60" alt="">
@@ -35,12 +35,12 @@
             <a class="nav-item nav-link" href="review">Review</a>
         </nav>
         <br>
-        <div class="container" ng-controller="GameController as ctrl">
+        <div class="container" data-ng-controller="GameController as ctrl">
             <div class="panel panel-default">
                 <div class="panel-heading text-light"><span class="lead">Game Registration Form </span></div>
                 <div class="formcontainer">
-                    <form ng-submit="ctrl.addGame()" name="gameForm" class="form-horizontal">
-                        <input type="hidden" ng-model="ctrl.game.id" />
+                    <form data-ng-submit="ctrl.addGame()" name="gameForm" class="form-horizontal">
+                        <input type="hidden" data-ng-model="ctrl.game.id" />
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="col-md-2 control-lable text-light" for="name">Name*</label>
@@ -86,9 +86,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="currentGame in ctrl.games">
-                                <td><span ng-bind="currentGame.name"></span></td>
-                                <td><span ng-bind="currentGame.genre"></span></td>
+                            <tr data-ng-repeat="currentGame in ctrl.games">
+                                <td><span data-ng-bind="currentGame.name"></span></td>
+                                <td><span data-ng-bind="currentGame.genre"></span></td>
                                 <td>
                                 </td>
                             </tr>
