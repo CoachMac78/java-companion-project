@@ -1,28 +1,29 @@
 package com.organization.mvcproject.service;
-import java.util.ArrayList;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.organization.mvcproject.model.Game;
-import com.organization.mvcproject.dao.GameLoopBasedDAO;
-import com.organization.mvcproject.service.*;
+
+import com.organization.bootcamp.mvcporoject.api.dao.GameDAO;
+import com.organization.bootcamp.mvcporoject.api.model.Game;
+import com.organization.bootcamp.mvcporoject.api.service.GameService;
 
 @Service
 public class GameServiceImpl implements GameService {
 	
 	@Autowired
-	private GameLoopBasedDAO gameDao;
+	private GameDAO gameLoopBasedDao;
 	
 	public List<Game> retrieveAllGames() {
-		return gameDao.findAllGames();
+		return gameLoopBasedDao.findAllGames();
 	}
 	
 	public Game saveGame(Game game) {
-		return gameDao.saveGame(game);
+		return gameLoopBasedDao.saveGame(game);
 	}
 	
 	public Game findGameById(Long id) {
-		return gameDao.findGameById(id);
+		return gameLoopBasedDao.findGameById(id);
 	}
 	
 	public boolean deleteGame(Long id) {

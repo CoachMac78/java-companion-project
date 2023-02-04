@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.organization.mvcproject.model.Game;
-import com.organization.mvcproject.service.GameService;
+import com.organization.bootcamp.mvcporoject.api.model.Game;
+import com.organization.bootcamp.mvcporoject.api.service.GameService;
+import com.organization.mvcproject.model.GameImpl;
 
 @RequestMapping(value ="/game")
 @RestController
@@ -29,15 +30,14 @@ public class GameController {
 	}
 	
 	@PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> createGame(@RequestBody Game game) {
+	public ResponseEntity<Void> createGame(@RequestBody GameImpl game) {
 		gameService.saveGame(game);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> updateGame(@RequestBody Game game) {
-		gameService.saveGame(game);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+	public ResponseEntity<?> updateGame(@RequestBody GameImpl game) {
+		return new ResponseEntity<>(gameService.saveGame(game), HttpStatus.OK);
 	}
 
 }

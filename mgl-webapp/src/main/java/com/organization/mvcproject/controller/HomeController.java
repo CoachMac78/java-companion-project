@@ -6,8 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.organization.mvcproject.model.Game;
-import com.organization.mvcproject.model.Review;
+import com.organization.mvcproject.model.GameImpl;
+import com.organization.mvcproject.model.ReviewImpl;
 import org.springframework.ui.ModelMap;
 
 @Controller
@@ -19,7 +19,7 @@ public class HomeController {
 	}
 
 	@PostMapping(value = "/addReview")
-	public ModelAndView addReview(Review review, ModelMap model) {
+	public ModelAndView addReview(ReviewImpl review, ModelMap model) {
 		if(review.getAuthor().equals("")) {
 			review.setAuthor("anonymous");
 		}
@@ -30,12 +30,12 @@ public class HomeController {
 	@GetMapping(value = "/review")
 	public ModelAndView review() {
 		
-		return new ModelAndView("reviewCreatePage", "command", new Review());
+		return new ModelAndView("reviewCreatePage", "command", new ReviewImpl());
 	}
 	
 	@GetMapping(value = "/games")
 	public ModelAndView game() {
-		return new ModelAndView("games", "command", new Game());
+		return new ModelAndView("games", "command", new GameImpl());
 	}
 	
 	@RequestMapping(value="/hello")

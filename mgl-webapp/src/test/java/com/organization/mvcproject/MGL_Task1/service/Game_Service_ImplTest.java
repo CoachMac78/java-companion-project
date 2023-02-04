@@ -39,23 +39,23 @@ class Game_Service_ImplTest {
 	@Autowired
 	private Game_Service gameServiceUnderTest;
 	
-	private static Game testGame = createGame(1);
+	private static GameImpl testGame = createGame(1);
 	
 	private  static final String TEST_GENRE = "Test Genre";
-	private static Game createGame(Integer number) {
-		Game game = new Game();
+	private static GameImpl createGame(Integer number) {
+		GameImpl game = new GameImpl();
 		 game.setGame_name("Testing Game Name " + String.valueOf(number));
 		 game.setGame_genre(TEST_GENRE);
 		 return game;
 	}
 	
-	private static List<Game> gamesToRemoveAfterTest = new ArrayList<>();
+	private static List<GameImpl> gamesToRemoveAfterTest = new ArrayList<>();
 	
 	@BeforeAll
 	@Test
 	void saveGameServiceSavesAndUpdatesGame() {
 		if(gamesToRemoveAfterTest.isEmpty()) {
-			Game game = gameServiceUnderTest.saveGame(testGame);
+			GameImpl game = gameServiceUnderTest.saveGame(testGame);
 			Assertions.assertNotNull(game.getGame_id());
 			
 			//updates 
@@ -83,7 +83,7 @@ class Game_Service_ImplTest {
 	
 	@Test
   	void retrieveAllGamesServiceReturnsGames() {
-		List<Game> games = gameServiceUnderTest.retrieveAllGames(); 
+		List<GameImpl> games = gameServiceUnderTest.retrieveAllGames(); 
 		assertNotNull(games);
 		assertTrue(games.size() >= 2 );
 	}

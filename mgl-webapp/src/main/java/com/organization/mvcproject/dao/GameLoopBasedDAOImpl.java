@@ -4,40 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import com.organization.mvcproject.model.Game;
+
+import com.organization.bootcamp.mvcporoject.api.model.Game;
+import com.organization.mvcproject.model.GameImpl;
 
 @Repository
-public class GameLoopBasedDAO {
+public class GameLoopBasedDAOImpl {
 
 	private static Long gameId = new Long(0);
-	private static List<Game> games = new ArrayList<>();
+	private static List<GameImpl> gameImpls = new ArrayList<>();
 
 	static {
-		games = populateGames();
+		gameImpls = populateGames();
 	}
 
-	private static List<Game> populateGames() {
+	private static List<GameImpl> populateGames() {
 
-		Game game1 = new Game();
+		GameImpl game1 = new GameImpl();
 		game1.setId(++gameId);
 		game1.setGenre("Sport");
 		game1.setName("Rocket League");
 
-		Game game2 = new Game();
+		GameImpl game2 = new GameImpl();
 		game2.setId(++gameId);
 		game2.setGenre("Shooter");
 		game2.setName("Halo 3");
 
-		Game game3 = new Game();
+		GameImpl game3 = new GameImpl();
 		game3.setId(++gameId);
 		game3.setGenre("MMORPG");
 		game3.setName("Runescape");
 
-		games.add(game1);
-		games.add(game2);
-		games.add(game3);
+		gameImpls.add(game1);
+		gameImpls.add(game2);
+		gameImpls.add(game3);
 
-		return games;
+		return gameImpls;
 	}
 	
 	/*
@@ -49,26 +51,26 @@ public class GameLoopBasedDAO {
 			Game foundGame = findGameById(game.getId());
 			if(foundGame != null) {
 				//update the game in the list
-				for (int i = 0; i < games.size(); i++) {
-					if(game.getId().equals(games.get(i).getId())) {
-						return games.set(i, game);
+				for (int i = 0; i < gameImpls.size(); i++) {
+					if(game.getId().equals(gameImpls.get(i).getId())) {
+						return gameImpls.set(i, (GameImpl) game);
 					}
 				}
 			}
 		}
 		game.setId(++gameId);
-		games.add(game);
+		gameImpls.add((GameImpl) game);
 		return game;
 	}
 
-	public List<Game> findAllGames() {
-		return games;
+	public List<GameImpl> findAllGames() {
+		return gameImpls;
 	}
 
-	public Game findGameById(Long id) {
+	public GameImpl findGameById(Long id) {
 		
 		//for each loop
-		for (Game g : games) {
+		for (GameImpl g : gameImpls) {
 			if(id.equals(g.getId())) {
 				return g; 
 			}
@@ -78,9 +80,9 @@ public class GameLoopBasedDAO {
 	}
 	
 	public boolean deleteGame(Long id) {
-		for(int i = 0; i < games.size(); i++) {
-			if( id.equals(games.get(i).getId())) {
-				games.remove(games.get(i));
+		for(int i = 0; i < gameImpls.size(); i++) {
+			if( id.equals(gameImpls.get(i).getId())) {
+				gameImpls.remove(gameImpls.get(i));
 				return true;
 			}
 		}
